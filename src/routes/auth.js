@@ -8,6 +8,7 @@ const upload = require("../middleware/upload");
 router.post("/new-doctor", verifyTokenAdmin, userController.addDoctor);
 
 router.get("/get-doctor", verifyToken, userController.getDoctor);
+router.get("/get-doctor/:sick", userController.getDoctorBySickName);
 router.get("/get-user", verifyTokenAdmin, userController.getUser);
 
 router.delete("/user/delete/:id", verifyTokenAdmin, userController.deleteUser);

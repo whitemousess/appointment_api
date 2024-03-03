@@ -8,6 +8,7 @@ router.post(
   verifyToken,
   appointmentController.newAppointment
 );
+router.post("/predict-diseases", appointmentController.predictDiseases);
 
 router.get(
   "/cancel-appointment/:id",

@@ -1,4 +1,5 @@
 const appointmentModel = require("../models/appointmentModel");
+const axios = require("axios");
 
 module.exports = {
   async newAppointment(req, res, next) {
@@ -52,6 +53,17 @@ module.exports = {
           status: "error",
           message: err.message,
         });
+      });
+  },
+
+  predictDiseases(req, res, next) {
+    axios
+      .get(`${process.env.AI_URL}predict_diseases?symptoms=${req.body.sicks}`)
+      .then((data) => {
+        res.json({ data: data.data.certain_predicted_diseases });
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
       });
   },
 

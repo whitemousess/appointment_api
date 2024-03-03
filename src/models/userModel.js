@@ -12,6 +12,7 @@ const schema = new Schema(
     imageUrl: { type: String, default: null },
     address: { type: String },
     specialist: { type: String },
+    sicks: { type: Array },
     role: { type: Number, default: 2 },
   },
   {

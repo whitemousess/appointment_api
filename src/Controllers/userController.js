@@ -128,6 +128,14 @@ module.exports = {
       });
   },
 
+  getDoctorBySickName(req, res, next) {
+    const regex = new RegExp(req.params.sick, "i");
+
+    UserModel.find({
+      sicks: { $regex: regex },
+    }).then((data) => res.json({ data: data }));
+  },
+
   getUser(req, res, next) {
     const { page, per_page, fullName } = req.query;
     const objWhere = { role: 2 };
@@ -188,6 +196,8 @@ module.exports = {
       const base64Data = fileBuffer.toString("base64");
       req.body.imageUrl = `data:image/jpeg;base64,${base64Data}`;
     }
+
+    req.body.sicks = req.body.sicks === "" ? [] : req.body.sicks.split(",");
 
     const handlePassword = CryptoJS.AES.encrypt(
       req.body.password,
